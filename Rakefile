@@ -129,7 +129,7 @@ end
 def test_config
   file = File.dirname(__FILE__) + '/test/config.yml'
   raise "Copy config.yml.default to config.yml and set the API keys" unless File.exists?(file)
-  @test_config ||= returning(YAML.load(File.read(file))) do |config|
+  @test_config ||= (YAML.load(File.read(file))).tap do |config|
     config.each do |service,values|
       values['responses'].each {|file,url| update_placeholders!(values, url) }
     end

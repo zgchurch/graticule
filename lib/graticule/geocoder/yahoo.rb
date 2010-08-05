@@ -45,7 +45,7 @@ module Graticule #:nodoc:
 
       def parse_response(xml) # :nodoc:
         r = xml.elements['ResultSet/Result[1]']
-        returning Location.new do |location|
+        Location.new.tap do |location|
           location.precision = PRECISION[r.attributes['precision']] || :unknown
 
           if r.attributes.include? 'warning' then

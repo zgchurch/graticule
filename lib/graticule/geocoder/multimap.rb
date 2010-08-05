@@ -48,7 +48,7 @@ module Graticule #:nodoc:
       
       def parse_response(xml)
         r = xml.elements['Results/Location[1]']
-        returning Location.new do |location|
+        Location.new.tap do |location|
           
           location.precision = PRECISION[r.attributes['geocodeQuality']] || :unknown
           

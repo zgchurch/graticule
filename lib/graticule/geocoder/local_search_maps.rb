@@ -33,7 +33,7 @@ module Graticule #:nodoc:
       end
     
       def parse_response(js)
-        returning Location.new do |location|
+        Location.new.tap do |location|
           coordinates = js.match(/map.centerAndZoom\(new GPoint\((.+?), (.+?)\)/)
           location.longitude = coordinates[1].to_f
           location.latitude = coordinates[2].to_f

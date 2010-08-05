@@ -53,7 +53,7 @@ module Graticule #:nodoc:
       def parse_response(xml) #:nodoc:
         longitude = xml.elements['/GeocodeResponse/LocationCollection/GeoAddress/LatLng/Lng'].text.to_f
         latitude = xml.elements['/GeocodeResponse/LocationCollection/GeoAddress/LatLng/Lat'].text.to_f
-        returning Location.new(:latitude => latitude, :longitude => longitude) do |l|
+        Location.new(:latitude => latitude, :longitude => longitude).tap do |l|
           address = REXML::XPath.first(xml, '/GeocodeResponse/LocationCollection/GeoAddress')
 
           if address

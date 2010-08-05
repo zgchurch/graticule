@@ -26,7 +26,7 @@ module Graticule #:nodoc:
 
       def parse_response(xml) #:nodoc:
         result = xml.elements['/PostcodeAnywhere/Data/Item[1]']
-        returning Location.new do |location|
+        Location.new.tap do |location|
           location.latitude = result.attribute('latitude').value.to_f
           location.longitude = result.attribute('longitude').value.to_f
           location.street = value(result.attribute('line1'))

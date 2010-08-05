@@ -16,7 +16,7 @@ module Graticule #:nodoc:
     private
       
       def parse_response(xml) #:nodoc:
-        returning Location.new do |location|
+        Location.new.tap do |location|
           location.latitude = xml.elements['geodata/latt'].text.to_f
           location.longitude = xml.elements['geodata/longt'].text.to_f
           location.street = xml.elements['geodata/standard/staddress'].text
